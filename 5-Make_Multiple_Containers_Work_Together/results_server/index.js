@@ -5,7 +5,7 @@ var entry = require('./db_handlers/entry.js');
 
 var app = express();
 
-mongoose.connect('mongodb://localhost:27017/docker_test');
+mongoose.connect('mongodb://172.17.0.2/16');
 
 app.set('view engine', 'ejs');
 
@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
     console.log(entries);
     res.render('display', {data: entries});
   });
-  
+
 });
 
 console.log('listening on port 3000...\n');

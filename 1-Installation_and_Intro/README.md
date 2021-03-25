@@ -20,11 +20,11 @@ Text that looks `like this --for --example` are commands that you should type in
 
 First things first, let's install Docker:
 
-- [ ] Go to [Docker's website](https://www.docker.com/products/docker) and download the version that's appropriate for your operating system
+- [x] Go to [Docker's website](https://www.docker.com/products/docker) and download the version that's appropriate for your operating system
 
-- [ ] After you've dragged Docker into your Applications, find Docker in your Applications and click it to complete the installation
+- [x] After you've dragged Docker into your Applications, find Docker in your Applications and click it to complete the installation
 
-- [ ] Check to make sure everything worked correctly. Open up the terminal and type `docker --version`
+- [x] Check to make sure everything worked correctly. Open up the terminal and type `docker --version`
 
 You should see something like:
 ```sh
@@ -36,9 +36,9 @@ as long as it's NOT:
 ```
 If it looks like that then something went wrong with the download or installation. Oops.
 
-- [ ] Nice! Let's run your first Docker command! In the terminal type `docker info`
+- [x] Nice! Let's run your first Docker command! In the terminal type `docker info`
 
-You should see something like this: 
+You should see something like this:
 
 ![dockerinfo](https://github.com/dylanlrrb/P-C-Y-Assets/blob/master/1/dockerinfo.png?raw=true)
 
@@ -50,14 +50,14 @@ This should make a little more sense as we go along - we'll be revisiting this c
 
 `docker run hello-world`
 
-At first, you will see a disheartening message: 
+At first, you will see a disheartening message:
 ```sh
 Unable to find image 'hello-world:latest' locally
 ```
 **Wait just a second and you will see something along the lines of this:**
 ```sh
 latest: Pulling from library/hello-world
-78445dd45222: Pull complete 
+78445dd45222: Pull complete
 Digest: sha256:c5515758d4c5e1e838e9cd307f6c6a0d620b5e07e6f927b07d05f6d12a1ac8d7
 Status: Downloaded newer image for hello-world:latest
 ```
@@ -66,7 +66,7 @@ Status: Downloaded newer image for hello-world:latest
 
 ---
 
-- [ ] Check to make sure that your hello-world container logged the following: 
+- [x] Check to make sure that your hello-world container logged the following:
 
 ![dockerhello](https://github.com/dylanlrrb/P-C-Y-Assets/blob/master/1/dockerhello.png?raw=true)
 
@@ -81,11 +81,11 @@ Images: 1
 ```
 
 ---
->Now, before we go any further, let's slow down and talk about 'images' and 'containers' for a bit. These are terms I'll be slinging around a lot so it's in your best interest to have a good mental model of what they are and how they relate to each other. 
+>Now, before we go any further, let's slow down and talk about 'images' and 'containers' for a bit. These are terms I'll be slinging around a lot so it's in your best interest to have a good mental model of what they are and how they relate to each other.
 >
->I'm going to reference my wonderful sandwich analogy that I introduced in [this repo's root README](https://github.com/dylanlrrb/Please-Contain-Yourself./tree/module1#what-is-docker) - so if you're wondering why I'm talking about Docker in terms of sandwiches... that's why I’m talking about Docker in terms of sandwiches. 
+>I'm going to reference my wonderful sandwich analogy that I introduced in [this repo's root README](https://github.com/dylanlrrb/Please-Contain-Yourself./tree/module1#what-is-docker) - so if you're wondering why I'm talking about Docker in terms of sandwiches... that's why I’m talking about Docker in terms of sandwiches.
 >
->Imagine you've made a sandwich. It is the most perfect sandwich you've ever made - and you know in the very pit of your soul that you'll never make a more flawless sandwich. Naturally, you do not dare eat it - so you quickly stash it in the refrigerator so you can keep your sandwich forever. 
+>Imagine you've made a sandwich. It is the most perfect sandwich you've ever made - and you know in the very pit of your soul that you'll never make a more flawless sandwich. Naturally, you do not dare eat it - so you quickly stash it in the refrigerator so you can keep your sandwich forever.
 >
 >As time passes you can't help but wonder what your perfect sandwich tastes like as it sits, still pristine, in the fridge. Just as your willpower is about to falter and you eat your immaculate creation, you find the solution to your problem advertised on a late-night infomercial. The latest advances in science have yielded a device that can clone sandwiches- any kind, with perfect fidelity, and with unlimited frequency.
 >
@@ -99,17 +99,17 @@ Images: 1
 
 Like I mentioned before, in the command `docker run hello-world`; 'hello-world' is the name of an image that you spun up a new container with. It is that container which actually ran and logged that message to the console.
 
-- [ ] There were two effects of running 'docker run hello-world'; the first is that it downloaded the 'hello-world' image from Dockerhub onto your machine. Run `docker images` to view the images that are cached on your machine. You should see:
+- [x] There were two effects of running 'docker run hello-world'; the first is that it downloaded the 'hello-world' image from Dockerhub onto your machine. Run `docker images` to view the images that are cached on your machine. You should see:
 
 ![dockerimages](https://github.com/dylanlrrb/P-C-Y-Assets/blob/master/1/dockerimages.png?raw=true)
 
-- [ ] The second effect is that it created and ran a container from that image. Run `docker ps -a` to see all of the containers on your machine. You should see something similar to this:
+- [x] The second effect is that it created and ran a container from that image. Run `docker ps -a` to see all of the containers on your machine. You should see something similar to this:
 
 ![dockerpsa1](https://github.com/dylanlrrb/P-C-Y-Assets/blob/master/1/dockerpsa1.png?raw=true)
 
 There's your first container! Isn't it handsome? There are several bits of information displayed with the `ps` command such as the image it was created from, how long ago it was spun up, and the container's status.
 
-- [ ] Now let's get a little tricky. Try spinning up 3 more containers from the hello-world image cached on your machine. If you did everything correctly, you should have seen the 'Hello from Docker!' message each time you successfully spun up a container.  
+- [ ] Now let's get a little tricky. Try spinning up 3 more containers from the hello-world image cached on your machine. If you did everything correctly, you should have seen the 'Hello from Docker!' message each time you successfully spun up a container.
 
 ---
 >I want to take a moment to explain the difference between using `docker ps` with and without the ` -a` flag.
@@ -128,20 +128,20 @@ There's your first container! Isn't it handsome? There are several bits of infor
 
 ---
 
-Take note that, unless a name is given to the container explicitly, each container is given a random name to identify it. 
+Take note that, unless a name is given to the container explicitly, each container is given a random name to identify it.
 
 ![dockernames](https://github.com/dylanlrrb/P-C-Y-Assets/blob/master/1/dockernames.png?raw=true)
 
-- [ ] Spin up one more hello-world container and give it a name by using the ` --name` flag like so:
+- [x] Spin up one more hello-world container and give it a name by using the ` --name` flag like so:
 
-`docker run --name punk_rock_unicorns hello-world`  
+`docker run --name punk_rock_unicorns hello-world`
 
 Run `docker ps -a` again and you'll see a total of 5 containers, the most recent of which has the charmingly quirky name of 'punk_rock_unicorns'
 
 ![dockernames2](https://github.com/dylanlrrb/P-C-Y-Assets/blob/master/1/dockernames2.png?raw=true)
 
 ---
->As a final note before we wrap up this module; despite the fact that we have created a bunch of containers based off the 'hello-world' image, there is still only one image stored on our machine. Run `docker info` and `docker images` again to check if you don't believe me. 
+>As a final note before we wrap up this module; despite the fact that we have created a bunch of containers based off the 'hello-world' image, there is still only one image stored on our machine. Run `docker info` and `docker images` again to check if you don't believe me.
 >
 >The original 'perfect sandwich' is still safe and preserved in the refrigerator. It's just waiting to spawn new sandwiches that we're allowed to eat.
 
@@ -156,7 +156,7 @@ Nice work creating your first containers! When your're ready move onto [Module2]
 - What containers are
 - `docker info`
 - `docker images`
-- `docker run <image-name>` 
+- `docker run <image-name>`
 - `docker ps`
 - `docker ps -a`
 - The ` --name` option

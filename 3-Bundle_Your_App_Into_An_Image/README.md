@@ -36,7 +36,7 @@ Hello! This server's random number is: <randomNumber>
 
 ---
 
-The concept of building an image with your app bundled into it is similar to the process of making a sandwich (yes, I'm using this analogy again - I warned you). 
+The concept of building an image with your app bundled into it is similar to the process of making a sandwich (yes, I'm using this analogy again - I warned you).
 
 If you want to build a sandwich you would use a recipe, right? Because a sandwich is built in several layers, a recipe might instruct you to lay the base layer of bread down, then a layer of mayonnaise, then a layer of pickles, then a layer lettuce, and so on and so forth. This is equivalent to how a Docker image is built - only the recipe Docker uses is called a 'Dockerfile' and the layers are changes to the filesystem rather than condiments and toppings.
 
@@ -48,13 +48,13 @@ So, if you were to build a bare bones image, your recipe (Dockerfile) would tell
 
 Let's get a little more familiar with layers. The images that we have used thus far were built from layers, but you didn't write the recipe (Dockerfile) for the sandwich (image), so you don't really know what the image is made of. But that's okay - this process abstracts away a lot of the complexity needed to build useful containers. You can, however get a feel for how many layers were abstracted away from you in a particular image when downloading one.
 
-- [ ] Try this exercise: run the command `docker pull node:latest`
+- [x] Try this exercise: run the command `docker pull node:latest`
 
 You will see that, in the process of pulling the node image down from Dockerhub, it lists out all the images that image is built from as it downloads
 
 ![dockerpull](https://github.com/dylanlrrb/P-C-Y-Assets/blob/master/3/dockerpull.png?raw=true)
 
-- [ ] When the image is successfully cached on your machine, run the command `docker history node:latest` This command is used in conjunction with an image name and shows the build history of the image; you can look at the 'CREATED BY' column to see the the actual ingredient in each layer of the sandwich (stated more technically - you can see the command that added each layer to the image)
+- [x] When the image is successfully cached on your machine, run the command `docker history node:latest` This command is used in conjunction with an image name and shows the build history of the image; you can look at the 'CREATED BY' column to see the the actual ingredient in each layer of the sandwich (stated more technically - you can see the command that added each layer to the image)
 
 ![dockerhist](https://github.com/dylanlrrb/P-C-Y-Assets/blob/master/3/dockerhist.png?raw=true)
 
@@ -68,11 +68,11 @@ You COULD scour your local health food stores to find all those exotic ingredien
 
 That is how we're going to approach bundling our app into an image. We're going to create a Dockerfile 'recipe' that uses a 'premade sandwich' image as the base ingredient and slap on our own custom ingredient (our app). Then we build from that Dockerfile and our containerized app image is ready to go! This is much easier than building that fancy sandwich from scratch! **(Then from here, that image with our app inside can then be spun into a container to be actually used)**
 
-The base image our Dockerfile recipe will use to build our custom image is going to be the 'node:latest' image that we just pulled down from Dockerhub. Built into this image is everything we need to run a node app. Sounds tasty, so let's add it to our Dockerfile. 
+The base image our Dockerfile recipe will use to build our custom image is going to be the 'node:latest' image that we just pulled down from Dockerhub. Built into this image is everything we need to run a node app. Sounds tasty, so let's add it to our Dockerfile.
 
-- [ ] Open up the Dockerfile in Module 3's directory and under the comment '# What image do you want to start building on?' type `FROM node:latest`
+- [x] Open up the Dockerfile in Module 3's directory and under the comment '# What image do you want to start building on?' type `FROM node:latest`
 
-- [ ] Under the comment '# Make a folder in your image where your app's source code can live'  type `RUN mkdir -p /src/app`
+- [x] Under the comment '# Make a folder in your image where your app's source code can live'  type `RUN mkdir -p /src/app`
 
 >`mkdir` : Creates a directory
 >
@@ -80,11 +80,11 @@ The base image our Dockerfile recipe will use to build our custom image is going
 >
 >`/src/app` : The path of the directory you are creating
 
-- [ ] Under the comment '# Tell your container where your app's source code will live' type `WORKDIR /src/app`
+- [x] Under the comment '# Tell your container where your app's source code will live' type `WORKDIR /src/app`
 
 >As the comment implies, this command tells your container which directory is the working directory
 
-- [ ] Under the comment '# What source code do you what to copy, and where to put it?' type `COPY . /src/app`
+- [x] Under the comment '# What source code do you what to copy, and where to put it?' type `COPY . /src/app`
 
 >`COPY` takes two arguments (It's a little hard to tell, but ` . ` and `/src/app` are separated by a space)
 >
@@ -92,11 +92,11 @@ The base image our Dockerfile recipe will use to build our custom image is going
 >
 >`/src/app` is the second argument and in this case refers to the directory inside of the image that we just made a few commands ago - the working directory where we want the app's source code to live and where the source code is going to be copied to.
 
-- [ ] Under the comment '# Does your app have any dependencies that should be installed?' type `RUN yarn install`.
+- [x] Under the comment '# Does your app have any dependencies that should be installed?' type `RUN yarn install`.
 
->This installs all the dependencies necessary to run our node application using the yarn package manager (which was included as part of the base image, conveniently enough). You might have noticed the .dockerignore file in this repo; I won't get in depth into what it does in this guide - you can research it if you're curious. But a quick explanation of it's purpose is that it prevents any previously installed node modules in the directory from being copied into the image. This guarantees all dependencies come from the `RUN yarn install` command rather than inadvertently copied from elsewhere. 
+>This installs all the dependencies necessary to run our node application using the yarn package manager (which was included as part of the base image, conveniently enough). You might have noticed the .dockerignore file in this repo; I won't get in depth into what it does in this guide - you can research it if you're curious. But a quick explanation of it's purpose is that it prevents any previously installed node modules in the directory from being copied into the image. This guarantees all dependencies come from the `RUN yarn install` command rather than inadvertently copied from elsewhere.
 
-- [ ] Under the comment '# What port will the container talk to the outside world with once created?' type `EXPOSE 3000`
+- [x] Under the comment '# What port will the container talk to the outside world with once created?' type `EXPOSE 3000`
 
 >This command will expose the container's port 3000 which will need to be mapped to a port on the host when spun into a container by using the ` -p` option with the `docker run` command
 
@@ -130,7 +130,7 @@ CMD [ "npm", "start" ]
 
 ```
 
-- [ ] Once everything checks out, it's time to finally build this thing. Run the command `docker build -t nodeserver .`
+- [x] Once everything checks out, it's time to finally build this thing. Run the command `docker build -t nodeserver .`
 
 **The ` . ` in the `docker build` command is a relative filepath that refers to the location of the Dockerfile you want to build. As such, MAKE SURE you are cd'd into the directory with said Dockerfile before running this command.**
 
@@ -154,7 +154,7 @@ docker build -t nodeserver .
 
 ` . ` : The relative path to the Dockerfile that we want to build into an image
 
-- [ ] You can see that our nodeserver image is chillin' safe and sound on our machine by running `docker images`
+- [x] You can see that our nodeserver image is chillin' safe and sound on our machine by running `docker images`
 
 ![dockerimage](https://github.com/dylanlrrb/P-C-Y-Assets/blob/master/3/dockerimage.png?raw=true)
 
@@ -163,15 +163,15 @@ docker build -t nodeserver .
 
 ---
 
-- [ ] Your image has been assembled and saved on your machine just like your perfect sandwich stored in the fridge - now let's start creating containers from it! Run `docker run -d -p 1000:3000 --name slytherin_rulez --rm nodeserver`
+- [x] Your image has been assembled and saved on your machine just like your perfect sandwich stored in the fridge - now let's start creating containers from it! Run `docker run -d -p 1000:3000 --name slytherin_rulez --rm nodeserver`
 
-- [ ] Check that it is running with `docker ps` and then visit `localhost:1000` in your browser
+- [x] Check that it is running with `docker ps` and then visit `localhost:1000` in your browser
 
 You'll see that our server is sending us a greeting along with a random number it was assigned when it was spun up.
 
-- [ ] Containers are stateless; they retain information about themselves only as long as they are running. For example: try refreshing the page - it has no effect on the number. Now, back in the terminal, run `docker restart slytherin_rulez`
+- [x] Containers are stateless; they retain information about themselves only as long as they are running. For example: try refreshing the page - it has no effect on the number. Now, back in the terminal, run `docker restart slytherin_rulez`
 
-- [ ] Go back to the browser and refresh the page. The number changed! What?? Because containers are stateless, restarting it caused everything within it to be lost.
+- [x] Go back to the browser and refresh the page. The number changed! What?? Because containers are stateless, restarting it caused everything within it to be lost.
 
 - [ ] And just for fun; make like, 3 more containers from our server image, each on a different port
 
@@ -190,18 +190,18 @@ On port 4000:
 docker run -d -p 4000:3000 --rm nodeserver
 ```
 
-- [ ] Open them all up on different tabs in your browser! They're all unique and independent containers serving you information! NEAT!
+- [x] Open them all up on different tabs in your browser! They're all unique and independent containers serving you information! NEAT!
 
 **Not only can you spin up as many containers as you want from the single image we made with our app (which is crazy cool and great for horizontally scaling), but all the containers are unique and don't interact with each other; the containers are identical, unique, and isolated at the same time!**
 
-- [ ] Lastly, clean up after yourself. If you created all of the containers with the ` --rm` flag you just need to stop all the running containers with `docker stop <container-name>` and they will automatically delete themselves.
+- [x] Lastly, clean up after yourself. If you created all of the containers with the ` --rm` flag you just need to stop all the running containers with `docker stop <container-name>` and they will automatically delete themselves.
 
 ---
 >Final Notes: Different base layer images have different instructions when used in Dockerfiles and require different configuration steps. For example, some images already have a working directory that you need to copy your source code into.
 >
 >I strongly encourage you to check out [Dockerhub](https://hub.docker.com/explore/) to marvel at the cornucopia of images to choose from. Its best to look at the official releases of any image, but find one and look at the instructions for configuring it’s environment with a Dockerfile. For example, in the official [golang image](https://hub.docker.com/_/golang/). When using the `golang:onbuild` image, almost all the commands are triggered automatically so the Dockerfile that you would have to write to bundle your app with this image would be a total of one line! ...Witchcraft.
 >
->Also, we used the ':latest' version of the node image; why might this be a bad idea, do you think? 
+>Also, we used the ':latest' version of the node image; why might this be a bad idea, do you think?
 
 ---
 
@@ -225,4 +225,4 @@ docker run -d -p 4000:3000 --rm nodeserver
 
 - [Dockerfile reference](https://docs.docker.com/engine/reference/builder/)
 - [Dockerhub](https://hub.docker.com/)
-- [Official node image on Dockerhub](https://hub.docker.com/_/node/) 
+- [Official node image on Dockerhub](https://hub.docker.com/_/node/)
